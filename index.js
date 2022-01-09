@@ -130,7 +130,7 @@ const runAction = () => {
 	for (let i = 0; i < maxAttempts; i += 1) {
 		try {
 			run(
-				`${useNpm ? "npx --no-install" : "USE_HARD_LINKS=false yarn run"} ${cmd} --${platform} ${
+				`${useNpm ? "npx --no-install" : (process.platform=="win32" ? "set USE_HARD_LINKS=false yarn run" : "USE_HARD_LINKS=false yarn run")} ${cmd} --${platform} ${
 					release ? "--publish always" : ""
 				} ${args}`,
 				appRoot,
